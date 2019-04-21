@@ -1,39 +1,45 @@
 import React from 'react';
 
-const style = {
+const styleField = {
     width: '80px',
     height: '80px',
     borderRadius: '50%',
     border: '1px solid black',
     margin: '5px'
 };
+const styleRow = {
+    display: 'flex',
+};
+
 
 const GameBoard = (props) => {
     return (
-        <div
-        style={{
-            display: 'flex',
-            width: '400px',
-            height: '400px',
-            justifyContent: 'center',
-
-        }}
-        >
+        <div>
             {
                 props.gameBoard.map(
                     (row, rowIndex) => (
                         <div
-                        key={rowIndex}
+                            style={styleRow}
+                            key={rowIndex}
                         >
                             {
                                 row.map(
                                     (field, fieldIndex) =>
-                                        <div
-                                            key={rowIndex + ' ' + fieldIndex}
-                                            style={style}
-                                            onClick={() => console.log(field)}
-                                        >
-                                        </div>
+                                        field === props.randomMolePlace ?
+                                            <div
+                                                key={rowIndex + ' ' + fieldIndex}
+                                                style={styleField}
+                                                onClick={() => props.onMoleClick(field)}
+                                            >
+                                                x
+                                            </div>
+                                            :
+                                            <div
+                                                key={rowIndex + ' ' + fieldIndex}
+                                                style={styleField}
+                                                onClick={() => props.onMoleClick(field)}
+                                            >
+                                            </div>
                                 )
                             }
                         </div>
