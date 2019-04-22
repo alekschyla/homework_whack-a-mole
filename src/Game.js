@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import GameBoard from "./GameBoard";
 import ModalWindow from "./ModalWindow";
 
+import Button from '@material-ui/core/Button';
+
 const gameBoardStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -28,8 +30,11 @@ class Game extends Component {
     };
 
     startGame = () => {
-        this.startInterval();
-        this.endGame();
+        if (this.state.isGameEnd || this.state.isGameEnd === null) {
+            this.setState({isGameEnd: false, score: 0});
+            this.startInterval();
+            this.endGame();
+        }
     };
 
     startInterval = () => {
@@ -50,7 +55,7 @@ class Game extends Component {
         setTimeout(() => {
             this.setState({isGameEnd: true});
             this.setState({randomMolePlace: 0});
-            this.setState({ modalOpen: true });
+            this.setState({modalOpen: true});
         }, this.state.gameTime);
     };
 
@@ -87,7 +92,7 @@ class Game extends Component {
     };
 
     handleCloseModal = () => {
-        this.setState({ modalOpen: false });
+        this.setState({modalOpen: false});
     };
 
     render() {
@@ -109,11 +114,17 @@ class Game extends Component {
                     onMoleClick={this.onMoleClick}
                 />
 
-                <button
+                <Button
+                    variant="contained"
                     onClick={this.startGame}
                 >
-                    zagraj
-                </button>
+                    {
+                        this.state.isGameEnd ?
+                            'zagraj jeszcze raz'
+                            :
+                            'zagraj'
+                    }
+                </Button>
             </div>
         );
     }

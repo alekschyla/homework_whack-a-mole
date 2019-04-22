@@ -1,28 +1,36 @@
 import React from 'react';
+import mole from './images/mole.png'
+
 
 const styleField = {
     width: '80px',
     height: '80px',
-    borderRadius: '50%',
     border: '1px solid black',
-    margin: '5px'
+    margin: '5px',
+    background: 'brown'
 };
 const styleMole = {
     width: '80px',
     height: '80px',
-    borderRadius: '50%',
     border: '1px solid black',
     margin: '5px',
-    backgroundColor: 'brown'
+    background: `brown url(${mole}) no-repeat center`,
+    backgroundSize: '100%',
 };
 const styleRow = {
     display: 'flex',
 };
 
+const styleGameBoard = {
+    margin: '20px',
+    background: 'green'
+};
 
 const GameBoard = (props) => {
     return (
-        <div>
+        <div
+        style={styleGameBoard}
+        >
             {
                 props.gameBoard.map(
                     (row, rowIndex) => (
@@ -39,7 +47,6 @@ const GameBoard = (props) => {
                                                 style={styleMole}
                                                 onClick={() => props.onMoleClick(field)}
                                             >
-
                                             </div>
                                             :
                                             <div
