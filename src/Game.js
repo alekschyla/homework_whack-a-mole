@@ -11,19 +11,35 @@ class Game extends Component {
         randomMolePlace: null,
         score: 0,
         moleTime: 2000,
-        gameTime: 120,
+        gameTime: 12000,
+        isGameEnd: null,
+        currentIntervalId: null,
     };
 
     startGame = () => {
-        this.generateRandomMolePlace();
+        this.startInterval();
+        this.endGame();
     };
 
     startInterval = () => {
-        setInterval(() => {
-                this.generateRandomMolePlace();
+        const intervalId = setInterval(() => {
+                if (this.state.isGameEnd) {
+                    clearInterval(intervalId);
+                } else {
+                    this.generateRandomMolePlace();
+                }
             },
             this.state.moleTime
-        )
+        );
+
+        this.state.currentIntervalId = intervalId;
+    };
+
+    endGame = () => {
+        setTimeout(() => {
+            this.setState({isGameEnd: true});
+            this.setState({randomMolePlace: 0});
+        }, this.state.gameTime);
     };
 
     generateRandomMolePlace = () => {
@@ -37,10 +53,28 @@ class Game extends Component {
     };
 
     onMoleClick = (field) => {
-        if (field === this.state.randomMolePlace) {
-            this.setState({score: this.state.score + 1})
+        if (field === this.state.randomMolePlace && !this.state.isGameEnd) {
+            this.setState({score: this.state.score + 1});
+            clearInterval(this.state.currentIntervalId);
+            this.startInterval();
         }
-        this.generateRandomMolePlace();
+        if (!this.state.isGameEnd) {
+            this.generateRandomMolePlace();
+        }
+
+        this.adjustMoleTime();
+    };
+
+    adjustMoleTime = () => {
+        if (this.state.score === 10) {
+            this.setState({moleTime: 1500})
+        }
+        if (this.state.score === 30) {
+            this.setState({moleTime: 1000})
+        }
+        if (this.state.score === 60) {
+            this.setState({moleTime: 700})
+        }
     };
 
     render() {
