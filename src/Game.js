@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
 import GameBoard from "./GameBoard";
+import ModalWindow from "./ModalWindow";
+
+const gameBoardStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '20px',
+    textAlign: 'center',
+};
 
 class Game extends Component {
     state = {
@@ -14,6 +24,7 @@ class Game extends Component {
         gameTime: 120000,
         isGameEnd: null,
         currentIntervalId: null,
+        modalOpen: false,
     };
 
     startGame = () => {
@@ -39,6 +50,7 @@ class Game extends Component {
         setTimeout(() => {
             this.setState({isGameEnd: true});
             this.setState({randomMolePlace: 0});
+            this.setState({ modalOpen: true });
         }, this.state.gameTime);
     };
 
@@ -74,24 +86,29 @@ class Game extends Component {
         }
     };
 
+    handleCloseModal = () => {
+        this.setState({ modalOpen: false });
+    };
+
     render() {
         return (
             <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    margin: '20px',
-                    textAlign: 'center',
-                }}
+                style={gameBoardStyle}
             >
                 <h1>Score: {this.state.score}</h1>
+
+                <ModalWindow
+                    modalOpen={this.state.modalOpen}
+                    handleCloseModal={this.handleCloseModal}
+                    score={this.state.score}
+                />
+
                 <GameBoard
                     gameBoard={this.state.gameBoard}
                     randomMolePlace={this.state.randomMolePlace}
                     onMoleClick={this.onMoleClick}
                 />
+
                 <button
                     onClick={this.startGame}
                 >
