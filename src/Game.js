@@ -11,7 +11,7 @@ class Game extends Component {
         randomMolePlace: null,
         score: 0,
         moleTime: 2000,
-        gameTime: 12000,
+        gameTime: 120000,
         isGameEnd: null,
         currentIntervalId: null,
     };
@@ -67,13 +67,10 @@ class Game extends Component {
 
     adjustMoleTime = () => {
         if (this.state.score === 10) {
-            this.setState({moleTime: 1500})
-        }
-        if (this.state.score === 30) {
             this.setState({moleTime: 1000})
         }
-        if (this.state.score === 60) {
-            this.setState({moleTime: 700})
+        if (this.state.score === 30) {
+            this.setState({moleTime: 500})
         }
     };
 
