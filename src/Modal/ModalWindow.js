@@ -1,9 +1,10 @@
 import React from 'react';
-import {withStyles} from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import {withStyles} from '@material-ui/core/styles/index';
+import Typography from '@material-ui/core/Typography/index';
+import Modal from '@material-ui/core/Modal/index';
+import Button from '@material-ui/core/Button/index';
+import TextField from '@material-ui/core/TextField/index';
+import ModalScores from "./ModalScores";
 
 
 function getModalStyle() {
@@ -64,6 +65,10 @@ class ModalWindow extends React.Component {
                                 Zapisz wynik
                             </Button>
                         </div>
+
+                        <ModalScores
+                            scores={this.props.scores}
+                        />
                         <SimpleModalWrapped/>
                     </div>
                 </Modal>

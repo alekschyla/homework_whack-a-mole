@@ -1,20 +1,22 @@
 import React from 'react';
 import mole from './images/mole.png'
+import hole from './images/hole.png'
 
 
 const styleField = {
     width: '80px',
-    height: '80px',
-    border: '1px solid black',
+    height: '90px',
     margin: '5px',
+    background: `url(${hole}) no-repeat center`,
+    backgroundSize: '100%',
 };
+
 const styleMole = {
     width: '80px',
-    height: '80px',
-    border: '1px solid black',
+    height: '90px',
     margin: '5px',
-    background: `url(${mole}) no-repeat center`,
-    backgroundSize: '100%',
+    background: `url(${mole}) no-repeat top, url(${hole}) no-repeat center`,
+    backgroundSize: '90%',
 };
 const styleRow = {
     display: 'flex',
@@ -22,7 +24,7 @@ const styleRow = {
 
 const styleGameBoard = {
     margin: '20px',
-    background: 'green'
+
 };
 
 const GameBoard = (props) => {
