@@ -7,14 +7,13 @@ const styleField = {
     height: '80px',
     border: '1px solid black',
     margin: '5px',
-    background: 'brown'
 };
 const styleMole = {
     width: '80px',
     height: '80px',
     border: '1px solid black',
     margin: '5px',
-    background: `brown url(${mole}) no-repeat center`,
+    background: `url(${mole}) no-repeat center`,
     backgroundSize: '100%',
 };
 const styleRow = {

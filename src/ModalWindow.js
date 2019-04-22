@@ -1,7 +1,10 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 
 function getModalStyle() {
     const top = 50;
@@ -29,7 +32,7 @@ class ModalWindow extends React.Component {
 
 
     render() {
-        const { classes } = this.props;
+        const {classes} = this.props;
 
         return (
             <div>
@@ -44,9 +47,24 @@ class ModalWindow extends React.Component {
                             <strong>Twój wynik to:</strong>
                         </Typography>
                         <Typography variant="subtitle1" id="simple-modal-description">
-                           {this.props.score}
+                            {this.props.score}
                         </Typography>
-                        <SimpleModalWrapped />
+
+                        <TextField
+                            label="Imię"
+                            value={this.props.gamerName}
+                            onChange={event => this.props.onChangeName(event.target.value)}
+                            margin="normal"
+                        />
+                        <div>
+                            <Button
+                                variant="contained"
+                                onClick={this.props.saveScore}
+                            >
+                                Zapisz wynik
+                            </Button>
+                        </div>
+                        <SimpleModalWrapped/>
                     </div>
                 </Modal>
             </div>

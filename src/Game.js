@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import GameBoard from "./GameBoard";
 import ModalWindow from "./ModalWindow";
+import {database} from './firebaseConfig'
 
 import Button from '@material-ui/core/Button';
 
@@ -22,11 +23,12 @@ class Game extends Component {
         ],
         randomMolePlace: null,
         score: 0,
-        moleTime: 2000,
+        moleTime: 1500,
         gameTime: 120000,
         isGameEnd: null,
         currentIntervalId: null,
         modalOpen: false,
+        gamerName: '',
     };
 
     startGame = () => {
@@ -84,15 +86,25 @@ class Game extends Component {
 
     adjustMoleTime = () => {
         if (this.state.score === 10) {
-            this.setState({moleTime: 1000})
+            this.setState({moleTime: 800})
         }
-        if (this.state.score === 30) {
+        if (this.state.score === 50) {
             this.setState({moleTime: 500})
         }
     };
 
     handleCloseModal = () => {
         this.setState({modalOpen: false});
+    };
+
+    onChangeName = (name) => {
+        this.setState({gamerName: name})
+    };
+
+    saveScore = () => {
+        if (this.state.gamerName !== '') {
+            database.ref(`/scores`).push({name: this.state.gamerName, score: this.state.score})
+        }
     };
 
     render() {
@@ -106,6 +118,9 @@ class Game extends Component {
                     modalOpen={this.state.modalOpen}
                     handleCloseModal={this.handleCloseModal}
                     score={this.state.score}
+                    onChangeName={this.onChangeName}
+                    gamerName={this.state.gamerName}
+                    saveScore={this.saveScore}
                 />
 
                 <GameBoard
