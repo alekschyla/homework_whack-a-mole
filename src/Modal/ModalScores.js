@@ -3,7 +3,6 @@ import Typography from "@material-ui/core/Typography";
 
 const ModalScores = (props) => {
 
-
     return (
         <div>
             <Typography
@@ -16,23 +15,24 @@ const ModalScores = (props) => {
             >
                 <strong>Najlepsze wyniki:</strong>
             </Typography>
+
             <ol>
                 {
                     Object.entries(props.scores)
                         .map(
-                        ([key, value]) => {
-                            return (
-                                <li
-                                    style={{
-                                        margin: '10px',
-                                    }}
-                                    key={key}
-                                >
-                                    <strong>{value.name}</strong>: {value.score}
-                                </li>
-                            )
-                        }
-                    )
+                            ([key, value]) => {
+                                return (
+                                    <li
+                                        style={{
+                                            margin: '10px',
+                                        }}
+                                        key={key}
+                                    >
+                                        <strong>{value.name}</strong>: {value.score}
+                                    </li>
+                                )
+                            }
+                        )
                 }
             </ol>
         </div>

@@ -24,7 +24,7 @@ class Game extends Component {
         randomMolePlace: null,
         score: 0,
         moleTime: 1500,
-        gameTime: 1200,
+        gameTime: 120000,
         isGameEnd: null,
         currentIntervalId: null,
         modalOpen: false,

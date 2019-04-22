@@ -38,16 +38,21 @@ class ModalWindow extends React.Component {
         return (
             <div>
                 <Modal
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
                     open={this.props.modalOpen}
                     onClose={this.props.handleCloseModal}
                 >
-                    <div style={getModalStyle()} className={classes.paper}>
-                        <Typography variant="h6" id="modal-title">
+                    <div
+                        style={getModalStyle()}
+                        className={classes.paper}
+                    >
+                        <Typography
+                            variant="h6"
+                        >
                             <strong>Twój wynik to:</strong>
                         </Typography>
-                        <Typography variant="subtitle1" id="simple-modal-description">
+                        <Typography
+                            variant="subtitle1"
+                        >
                             {this.props.score}
                         </Typography>
 
